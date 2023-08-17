@@ -17,9 +17,11 @@
         "prettier": "^3.0.2",
         "sass": "^1.65.1",
         "tailwindcss": "^3.3.3",
+        "vee-validate": "^4.6.10",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1",
         "vue-router": "^4.2.4",
-        "vuex": "^4.1.0"
+        "vuex": "^4.1.0",
+        "yup": "^1.2.0"
     }
 }
