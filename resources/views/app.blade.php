@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>How To Install Vue 3 in Laravel 9 with Vite</title>
 
-	@vite('resources/css/app.css')
+	@vite('resources/css/app.scss')
 </head>
 <body>
 	<div id="app"></div>
