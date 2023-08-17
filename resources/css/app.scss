@@ -13,3 +13,28 @@
 * {
     font-family: 'Montserrat', sans-serif;
 }
+
+.weather-app {
+    margin: 0 auto;
+    padding-top: 200px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    max-width: 500px;
+    h1 {
+        color: white;
+    }
+}
+
+.weather-details {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -70,18 +70,69 @@
       </div>
     </div>
   </nav>
+  <div class="weather-app">
+    <h1>Select Capital City</h1>
+    <select v-model="selectedCity" @change="getWeather">
+      <option value="Washington">Washington</option>
+      <option v-for="city in capitalCities" :key="city">{{ city }}</option>
+    </select>
+    <div v-if="weather" class="weather-details">
+      <h2>{{ weather.name }} Weather</h2>
+      <p class="weather-info">
+        <span class="icon">
+          <ion-icon name="sunny"></ion-icon>
+        </span>
+        {{ `Temperature: ${weather.main.temp}°C` }}
+      </p>
+      <p>{{ `Weather: ${weather.weather[0].description}` }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'Home',
   data() {
     return {
-      isActive: true
+      loading: false,
+      message: '',
+      isActive: true,
+      capitalCities: [],
+      selectedCity: 'Washington',
+      weather: null
     };
   },
-  created() {},
+  async created() {
+    await this.fetchCapitalCities();
+    await this.getWeather();
+  },
+  computed: {},
   methods: {
+    async fetchCapitalCities() {
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all');
+        this.capitalCities = response.data
+          .filter((country) => country.capital && country.capital[0])
+          .map((country) => country.capital[0]);
+      } catch (error) {
+        console.error('Error fetching capital cities:', error);
+      }
+    },
+    async getWeather() {
+      this.$store.dispatch('weather/getWeather', { city: this.selectedCity }).then(
+        (response) => {
+          if (response.status === 200) {
+            this.weather = response.data;
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.message =
+            (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        }
+      );
+    },
     handleUser() {
       this.isActive ? (this.isActive = false) : (this.isActive = true);
     },
