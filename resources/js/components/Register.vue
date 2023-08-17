@@ -124,7 +124,7 @@ export default {
       this.loading = true;
       this.$store.dispatch('auth/register', user).then(
         (response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             this.$router.push('/login');
           } else {
             this.loading = false;
