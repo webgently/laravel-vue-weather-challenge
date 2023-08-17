@@ -16,6 +16,14 @@ class AuthService {
         return response;
       });
   }
+  logout() {
+    return axios.post(API_URL + 'logout').then((response) => {
+      if (response.status === 200) {
+        localStorage.removeItem('token');
+      }
+      return response;
+    });
+  }
   register(user) {
     return axios
       .post(API_URL + 'register', {
